@@ -12,13 +12,6 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
 
-    /**
-     * Отправляет регистрационное email-письмо новому пользователю.
-     *
-     * @param to       Адрес получателя
-     * @param username Имя пользователя
-     * @param body
-     */
 
     public void sendRegistrationEmail(String to, String username, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -28,6 +21,18 @@ public class EmailService {
 
         emailSender.send(message);
     }
+
+    public void sendPasswordReset(String recipientEmail, String newPassword) {
+        // Создаем сообщение
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(recipientEmail);
+        message.setSubject("Сброс пароля");
+        message.setText("Ваш новый пароль: " + newPassword);
+
+        // Отправляем сообщение
+        emailSender.send(message);
+    }
+
 
 
 
