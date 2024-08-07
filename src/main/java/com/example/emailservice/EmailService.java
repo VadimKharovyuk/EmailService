@@ -13,6 +13,16 @@ public class EmailService {
     private final JavaMailSender emailSender;
 
 
+    public void sendPasswordReset(String recipientEmail, String newPassword) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(recipientEmail);
+        message.setSubject("Сброс пароля");
+        message.setText("Ваш новый пароль: " + newPassword);
+
+        emailSender.send(message);
+    }
+
+
     public void sendRegistrationEmail(String to, String username, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
@@ -21,19 +31,6 @@ public class EmailService {
 
         emailSender.send(message);
     }
-
-    public void sendPasswordReset(String recipientEmail, String newPassword) {
-        // Создаем сообщение
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(recipientEmail);
-        message.setSubject("Сброс пароля");
-        message.setText("Ваш новый пароль: " + newPassword);
-
-        // Отправляем сообщение
-        emailSender.send(message);
-    }
-
-
 
 
 }
